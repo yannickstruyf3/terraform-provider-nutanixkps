@@ -36,17 +36,20 @@ func resourceNode() *schema.Resource {
 		DeleteContext: resourceNodeDelete,
 		Schema: map[string]*schema.Schema{
 			"name": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
+				Description: "Name of the node",
+				Type:        schema.TypeString,
+				Required:    true,
 			},
 			"description": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
+				Description: "Description of the node",
+				Type:        schema.TypeString,
+				Required:    true,
 			},
 			"serial_number": &schema.Schema{
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Description: "Node serial",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 				ValidateFunc: func(val interface{}, key string) (warns []string, errs []error) {
 					s := val.(string)
 					if !utils.IsUpper(s) {
@@ -56,19 +59,22 @@ func resourceNode() *schema.Resource {
 				},
 			},
 			"service_domain_id": {
-				Type:     schema.TypeString,
-				Required: true,
-				ForceNew: true,
+				Description: "ID of the service domain",
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
 			},
 			"is_bootstrap_master": {
-				Type:     schema.TypeBool,
-				Optional: true,
-				Computed: true,
+				Description: "Is bootstrap master",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Computed:    true,
 			},
 			"role": {
-				Type:     schema.TypeList,
-				Required: true,
-				MaxItems: 1,
+				Description: "Role of the node",
+				Type:        schema.TypeList,
+				Required:    true,
+				MaxItems:    1,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
 						"master": {
@@ -83,27 +89,32 @@ func resourceNode() *schema.Resource {
 				},
 			},
 			"gateway": {
+				Description:  "Network gateway of the node",
 				Type:         schema.TypeString,
 				Required:     true,
 				ValidateFunc: validation.IsIPAddress,
 			},
 			"ip_address": {
+				Description:  "IP of the node",
 				Type:         schema.TypeString,
 				Required:     true,
 				ForceNew:     true,
 				ValidateFunc: validation.IsIPAddress,
 			},
 			"subnet": {
+				Description:  "Subnet of the node",
 				Type:         schema.TypeString,
 				Required:     true,
 				ValidateFunc: validation.IsIPAddress,
 			},
 			"wait_for_onboarding": {
-				Type:     schema.TypeBool,
-				Optional: true,
-				Default:  false,
+				Description: "Wait for node onboarding completion",
+				Type:        schema.TypeBool,
+				Optional:    true,
+				Default:     false,
 			},
 			"wait_timeout_minutes": {
+				Description:  "Amount of minutes before timeout",
 				Type:         schema.TypeInt,
 				Optional:     true,
 				Default:      DEFAULTWAITTIMEOUT,

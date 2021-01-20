@@ -1,0 +1,20 @@
+---
+layout: ""
+page_title: "Provider: nutanixkps"
+description: |-
+  The Nutanix KPS provider provides resources to interact with Nutanix Karbon Platform Services.
+---
+
+# nutanixkps Provider
+
+The kps provider provides resources to interact with the Nutanix KPS API.
+
+## Example Usage
+```
+provider "nutanixkps" {
+  username  = var.kps_username
+  password  = var.kps_password
+}
+
+```
+{{ .SchemaMarkdown | trimspace }}
